@@ -123,10 +123,11 @@ class PostController {
     if (_.isEmpty(posts)) {
       return res.status(404).send({ status: false, body: 'no post found' });
     }
-    if (req.userData === undefined || req.userData !== req.posts.userId) {
-    }
-
-    return res.status(200).send({ status: true, body: posts });
+    // if (req.userData === undefined || req.userData !== req.posts.userId) {
+      const update = await postServiceV2.updatePost(req.params.id, {views: posts.views + 1 });
+      return res.status(200).send({ status: true, body: update });
+   // }
+  //  return res.status(200).send({ status: true, body: posts });
   }
 }
 export default new PostController();
