@@ -151,7 +151,7 @@ class PostController {
     }
     if (req.userData === undefined || req.userData !== req.posts.userId) {
       const update = await postService.updatePost(req.params.id, {views: posts.views + 1 });
-    
+      return res.status(200).send({ status: true, body: posts });
     }
     return res.status(200).send({ status: true, body: posts });
   }
