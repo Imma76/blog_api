@@ -10,7 +10,7 @@ const app = express();
 
 middleware(app);
 
-const PORT = process.env.PORT || 4011;
+const PORT = process.env.PORT || 2011;
 app.listen(PORT, () => {
   logger.info(`PORT IS LISTENING ON ${PORT}`);
 });
