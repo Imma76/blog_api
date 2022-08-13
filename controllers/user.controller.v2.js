@@ -33,37 +33,37 @@ class UserControllerV2 {
     };
     const newUser = await UserService.create(data);
 
-    const verificationToken = newUser.generateToken();
-    const url = `${process.env.APP_URL}/api/v1/users/verify/${verificationToken}`;
-    const response = {
-      body: {
-        name: `${req.body.firstName} ${req.body.lastName}`,
-        intro: 'Email Verification Link',
-        action: {
-          instructions:
-              'If you did not request for this mail, Please Ignore it. To Verify your Email password, click on the link below:',
-          button: {
-            text: 'Verify Email',
-            link: url
-          }
-        },
-        outro: 'Do not share this link with anyone.'
-      }
-    };
+    // const verificationToken = newUser.generateToken();
+    // const url = `${process.env.APP_URL}/api/v1/users/verify/${verificationToken}`;
+    // const response = {
+    //   body: {
+    //     name: `${req.body.firstName} ${req.body.lastName}`,
+    //     intro: 'Email Verification Link',
+    //     action: {
+    //       instructions:
+    //           'If you did not request for this mail, Please Ignore it. To Verify your Email password, click on the link below:',
+    //       button: {
+    //         text: 'Verify Email',
+    //         link: url
+    //       }
+    //     },
+    //     outro: 'Do not share this link with anyone.'
+    //   }
+    // };
 
-    const mail = mailGenerator.generate(response);
+    // const mail = mailGenerator.generate(response);
 
-    const message = {
-      from: 'Genesys-Blog <genesysblogapp@gmail.com>',
-      to: req.body.email,
-      subject: 'Verify Your Email',
-      html: mail
-    };
+    // const message = {
+    //   from: 'Genesys-Blog <genesysblogapp@gmail.com>',
+    //   to: req.body.email,
+    //   subject: 'Verify Your Email',
+    //   html: mail
+    // };
 
-    await transporter.sendMail(message);
+    // await transporter.sendMail(message);
 
     return res.status(201).send({
-      message: `Sent a verification email to ${req.body.email}`
+      message: 'user created successfully'
     });
   }
 
