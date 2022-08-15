@@ -106,7 +106,7 @@ class UserControllerV2 {
     const result = await cloudinary.v2.uploader.upload(req.file.path);
     const data = { photo: result.url };
 
-    const update = await userService.updateUserImage(req.body.id, data);
+    const update = await userService.updateUserImage(req.userData._id, data);
     if (update.acknowledged === true) {
       return res.status(201).send({ status: true, message: 'image uploaded successfully' });
     }
