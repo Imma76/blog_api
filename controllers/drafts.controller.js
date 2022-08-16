@@ -2,9 +2,9 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable import/no-named-as-default-member */
-import _ from 'lodash';
-import draftsServices from '../services/drafts.services.js';
-import cloudinary from '../config/cloudinary.config.js';
+import _ from "lodash";
+import cloudinary from "../config/cloudinary.config.js";
+import draftsServices from "../services/drafts.services.js";
 
 class DraftsController {
   async createDrafts(req, res) {
@@ -23,27 +23,47 @@ class DraftsController {
   async updateDrafts(req, res) {
     const findDrafts = await draftsServices.getDrafts(req.params.id);
     if (_.isEmpty(findDrafts)) {
-      return res.status(404).send({ status: false, message: 'the drafts you want to update does not exist' });
+      return res
+        .status(404)
+        .send({
+          status: false,
+          message: "the drafts you want to update does not exist",
+        });
     }
     const update = await draftsServices.updateDrafts(req.params.id, req.body);
-    return res.status(200).send({ status: true, message: 'drafts updated successfully', body: update });
+    return res
+      .status(200)
+      .send({
+        status: true,
+        message: "drafts updated successfully",
+        body: update,
+      });
   }
 
   async deleteDrafts(req, res) {
     const findDrafts = await draftsServices.getDrafts(req.userData._id);
     if (_.isEmpty(findDrafts)) {
-      return res.status(404).send({ status: false, message: 'the drafts you want to delete does not exist' });
+      return res
+        .status(404)
+        .send({
+          status: false,
+          message: "the drafts you want to delete does not exist",
+        });
     }
     const deleteDrafts = await draftsServices.deleteDrafts(req.userData._id);
-    return res.status(200).send({ status: true, message: 'drafts deleted successfully' });
+    return res
+      .status(200)
+      .send({ status: true, message: "drafts deleted successfully" });
   }
 
   async getDrafts(req, res) {
     const findDrafts = await draftsServices.getUserDrafts(req.userData._id);
     if (_.isEmpty(findDrafts)) {
-      return res.status(404).send({ status: false, message: 'this user has no drafts' });
-      }
-      return res.status(404).send({ status: true, body: findDrafts });
+      return res
+        .status(404)
+        .send({ status: false, message: "this user has no drafts" });
+    }
+    return res.status(200).send({ status: true, body: findDrafts });
   }
 }
 

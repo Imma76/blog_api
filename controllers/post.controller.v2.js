@@ -20,7 +20,7 @@ class PostController {
 
     const { body } = req;
     body.userId = req.userData._id;
-    body.image = result.url;
+    body.image = result.secure_url;
     body.isPublished = true;
     const post = await postServiceV2.postBlog(body);
     return res

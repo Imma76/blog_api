@@ -104,7 +104,7 @@ class UserControllerV2 {
       api_secret: process.env.API_SECRET
     });
     const result = await cloudinary.v2.uploader.upload(req.file.path);
-    const data = { photo: result.url };
+    const data = { photo: result.secure_url };
 
     const update = await userService.updateUserImage(req.userData._id, data);
     if (update.acknowledged === true) {
